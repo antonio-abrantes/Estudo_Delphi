@@ -1,0 +1,46 @@
+unit UMensagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls;
+
+type
+  TFMensagem = class(TForm)
+    Image2: TImage;
+    Image1: TImage;
+    Label1: TLabel;
+    procedure FormCreate(Sender: TObject; msg: string);
+    procedure Image2Click(Sender: TObject);
+    Procedure Mensagem(msg : string);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FMensagem: TFMensagem;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFMensagem.FormCreate(Sender: TObject);
+begin
+    Mensagem(msg);
+end;
+
+procedure TFMensagem.Image2Click(Sender: TObject);
+begin
+    Close;
+end;
+
+Procedure TFMensagem.Mensagem(msg: string);
+begin
+   Label1.Caption := msg;
+end;
+
+end.

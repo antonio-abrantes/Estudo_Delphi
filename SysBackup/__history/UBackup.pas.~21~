@@ -1,0 +1,95 @@
+unit UBackup;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FileCtrl,
+  Vcl.Imaging.pngimage;
+
+type
+  TFBackup = class(TForm)
+    edtOrigem: TButtonedEdit;
+    Button1: TButton;
+    btnProcessar: TButton;
+    edtDestino: TButtonedEdit;
+    Button2: TButton;
+    Image1: TImage;
+    Image2: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    procedure Button1Click(Sender: TObject);
+    procedure btnProcessarClick(Sender: TObject);
+    Procedure backup(Origem, Destino : string);
+    procedure Button2Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FBackup: TFBackup;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFBackup.btnProcessarClick(Sender: TObject);
+begin
+  backup(edtOrigem.Text, edtDestino.Text);
+end;
+
+procedure TFBackup.Button1Click(Sender: TObject);
+var
+  comeco : Integer;
+  temp, selDir, arquivo : string;
+begin
+  SelectDirectory('Selecione uma pasta', 'C:\Controle de Frotas\Backup', selDir);
+  edtOrigem.Text := selDir;
+end;
+
+procedure TFBackup.Button2Click(Sender: TObject);
+var
+  comeco : Integer;
+  temp, selDir, arquivo : string;
+begin
+   SelectDirectory('Selecione uma pasta', 'C:\Controle de Frotas\BD', selDir);
+   edtDestino.Text := selDir;
+end;
+
+procedure TFBackup.Image2Click(Sender: TObject);
+begin
+    Application.Terminate;
+end;
+
+Procedure TFBackup.backup(Origem, Destino : string);
+var
+  I : Integer;
+  tempOrigem, tempDestino : string;
+  SR: TSearchRec;
+begin
+    try
+
+      I := FindFirst(Origem+'\*.*', faAnyFile, SR);
+
+      while I = 0 do
+        begin
+            if (SR.Attr and faDirectory) <> faDirectory then begin
+              tempOrigem := Origem+'\' + SR.Name;
+              tempDestino := Destino+'\' + SR.Name;
+            if not CopyFile(PChar(tempOrigem), PChar(tempDestino), false) then //Caso ocorra algum erro
+              ShowMessage('Erro ao copiar \' + tempOrigem + ' para \' + tempDestino);
+            end;
+          I := FindNext(SR);
+        end;
+        ShowMessage('Backup realizado com sucesso!');
+    Except
+      ShowMessage('Erro');
+    end;
+
+end;
+
+end.

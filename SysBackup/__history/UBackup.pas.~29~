@@ -1,0 +1,113 @@
+unit UBackup;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FileCtrl, UMensagem,
+  Vcl.Imaging.pngimage, Vcl.Buttons;
+
+type
+  TFBackup = class(TForm)
+    edtOrigem: TButtonedEdit;
+    edtDestino: TButtonedEdit;
+    Image1: TImage;
+    Image2: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Button1: TSpeedButton;
+    Button2: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Procedure backup(Origem, Destino : string);
+    procedure Button2Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    Procedure msg(texto, tipo : string);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FBackup: TFBackup;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFBackup.Button1Click(Sender: TObject);
+var
+  selDir : string;
+begin
+  SelectDirectory('Selecione uma pasta', 'C:\Controle de Frotas\Backup', selDir);
+  edtOrigem.Text := selDir;
+end;
+
+procedure TFBackup.Button2Click(Sender: TObject);
+var
+  selDir : string;
+begin
+   SelectDirectory('Selecione uma pasta', 'C:\Controle de Frotas\BD', selDir);
+   edtDestino.Text := selDir;
+end;
+
+procedure TFBackup.Image2Click(Sender: TObject);
+begin
+    Application.Terminate;
+end;
+
+procedure TFBackup.SpeedButton1Click(Sender: TObject);
+begin
+  backup(edtOrigem.Text, edtDestino.Text);
+end;
+
+procedure TFBackup.SpeedButton2Click(Sender: TObject);
+begin
+  edtOrigem.Text := 'Abrir';
+  edtDestino.Text := 'Abrir';
+end;
+
+Procedure TFBackup.backup(Origem, Destino : string);
+var
+  I : Integer;
+  tempOrigem, tempDestino : string;
+  SR: TSearchRec;
+begin
+    try
+      if (Origem <> '') and (Origem <> 'Abrir') and (Destino <> '') and (Destino <> 'Abrir')then
+      begin
+        I := FindFirst(Origem+'\*.*', faAnyFile, SR);
+
+      while I = 0 do
+        begin
+            if (SR.Attr and faDirectory) <> faDirectory then begin
+              tempOrigem := Origem+'\' + SR.Name;
+              tempDestino := Destino+'\' + SR.Name;
+            if not CopyFile(PChar(tempOrigem), PChar(tempDestino), false) then //Caso ocorra algum erro
+              msg('Erro ao copiar \' + tempOrigem +#13+ ' para \' + tempDestino, 'error');
+            end;
+          I := FindNext(SR);
+        end;
+        msg('Backup realizado com sucesso!', 'confirm');
+      end else
+        msg('Sem arquivos para processar!', 'alert');
+    Except
+      msg('Erro ao realizar backup!', 'error');
+    end;
+
+end;
+// Para quebra de linha usar #13
+Procedure TFBackup.msg(texto, tipo : string);
+begin
+    Application.CreateForm(TFMensagem, FMensagem);
+    FMensagem.Mensagem(texto, tipo);
+    FMensagem.ShowModal;
+    FMensagem.Free;
+end;
+
+end.

@@ -1,0 +1,86 @@
+unit UBackup;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FileCtrl;
+
+type
+  TFBackup = class(TForm)
+    edtAbrir1: TButtonedEdit;
+    Button1: TButton;
+    btnProcessar: TButton;
+    edtAbri2: TButtonedEdit;
+    Button2: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure btnProcessarClick(Sender: TObject);
+    Procedure backup;
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FBackup: TFBackup;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFBackup.btnProcessarClick(Sender: TObject);
+begin
+  backup;
+end;
+
+procedure TFBackup.Button1Click(Sender: TObject);
+var
+  comeco : Integer;
+  temp, selDir, arquivo : string;
+begin
+  SelectDirectory('Selecione uma pasta', 'C:\Controle de Frotas\Backup', selDir);
+  edtAbrir1.Text := selDir;
+end;
+
+procedure TFBackup.Button2Click(Sender: TObject);
+var
+  comeco : Integer;
+  temp, selDir, arquivo : string;
+begin
+   SelectDirectory('Selecione uma pasta', 'C:\Controle de Frotas\BD', selDir);
+   edtAbri2.Text := selDir;
+end;
+
+Procedure TFBackup.backup;
+var
+  comeco, I : Integer;
+  temp, selDir, arquivo : string;
+  nome, Origem, Destino, NomeArquivo : string;
+  SR: TSearchRec;
+begin
+    selDir := edtAbrir1.Text;
+    try
+      comeco := POS('bakcup_dia_', selDir);
+      temp := Copy(selDir, comeco);
+      I := FindFirst('C:\\Controle de Frotas\\Backup\\'+temp+'\\*.*', faAnyFile, SR);
+
+      while I = 0 do
+        begin
+            if (SR.Attr and faDirectory) <> faDirectory then begin
+              Origem := 'C:\Controle de Frotas\Backup\'+temp+'\'+SR.Name;
+              Destino := 'C:\Controle de Frotas\BD\Teste\' + SR.Name;
+            if not CopyFile(PChar(Origem), PChar(Destino), false) then //Caso ocorra algum erro
+              ShowMessage('Erro ao copiar \' + Origem + ' para \' + Destino);
+            end;
+          I := FindNext(SR);
+        end;
+        ShowMessage('Backup realizado com sucesso!');
+    Except
+      ShowMessage('Erro');
+    end;
+
+end;
+
+end.

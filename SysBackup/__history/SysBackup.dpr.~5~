@@ -1,0 +1,18 @@
+program SysBackup;
+
+uses
+  Vcl.Forms,
+  UPrincipal in 'UPrincipal.pas' {Form1},
+  UBackup in 'UBackup.pas' {FBackup},
+  UMensagem in 'UMensagem.pas' {FMensagem};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFBackup, FBackup);
+  Application.CreateForm(TFMensagem, FMensagem);
+  Application.Run;
+end.

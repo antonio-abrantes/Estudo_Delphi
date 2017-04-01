@@ -1,0 +1,41 @@
+unit UPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+type
+   TMinhasCores = 'A'..'E';
+   Mat01 = array of Char;
+var
+  temp : TMinhasCores;
+  mat : Mat01;
+  Mat02 : array[1..10] of Char;
+  Mat03 : array of Char;
+begin
+    //mat[1]
+   ShowMessage(temp);
+end;
+
+end.

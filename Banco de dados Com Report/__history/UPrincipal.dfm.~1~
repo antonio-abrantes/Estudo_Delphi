@@ -1,0 +1,94 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 326
+  ClientWidth = 641
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GBPrincipal: TGroupBox
+    Left = 56
+    Top = 32
+    Width = 545
+    Height = 265
+    TabOrder = 0
+    object DBGrid1: TDBGrid
+      Left = 2
+      Top = 15
+      Width = 541
+      Height = 223
+      Align = alClient
+      Color = clHighlight
+      DataSource = DSclientes
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Cod'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Nome'
+          Width = 250
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Cidade'
+          Width = 200
+          Visible = True
+        end>
+    end
+    object DBNavigator1: TDBNavigator
+      Left = 2
+      Top = 238
+      Width = 541
+      Height = 25
+      DataSource = DSclientes
+      Align = alBottom
+      Kind = dbnHorizontal
+      TabOrder = 1
+      ExplicitLeft = 120
+      ExplicitTop = 184
+      ExplicitWidth = 240
+    end
+  end
+  object Conexao: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Tonho\Docu' +
+      'ments\bd_teste.mdb;Persist Security Info=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 56
+    Top = 280
+  end
+  object TBClientes: TADOTable
+    Active = True
+    Connection = Conexao
+    CursorType = ctStatic
+    TableName = 'Clientes'
+    Left = 136
+    Top = 280
+  end
+  object DSclientes: TDataSource
+    DataSet = TBClientes
+    Left = 200
+    Top = 280
+  end
+end

@@ -1,0 +1,50 @@
+unit UMensagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TFMensagem = class(TForm)
+    GroupBox1: TGroupBox;
+    alert: TImage;
+    Label1: TLabel;
+    Image2: TImage;
+    SpeedButton1: TSpeedButton;
+    confirm: TImage;
+    procedure Image2Click(Sender: TObject);
+    Procedure Mensagem(msg : string; tipo: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FMensagem: TFMensagem;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFMensagem.Image2Click(Sender: TObject);
+begin
+    Close;
+end;
+
+Procedure TFMensagem.Mensagem(msg: string; tipo : Integer);
+begin
+   Label1.Caption := msg;
+   if tipo = 1 then
+      confirm.Visible := true;
+      alert.Visible := false;
+   if tipo = 2 then
+      confirm.Visible := false;
+      alert.Visible := true;
+
+end;
+
+end.

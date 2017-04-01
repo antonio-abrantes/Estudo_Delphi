@@ -1,0 +1,16 @@
+program SysBackup;
+
+uses
+  Vcl.Forms,
+  UPrincipal in 'UPrincipal.pas' {Form1},
+  UBackup in 'D:\Projeto Frota\Fontes_Frota\UBackup.pas' {FBackup};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFBackup, FBackup);
+  Application.Run;
+end.

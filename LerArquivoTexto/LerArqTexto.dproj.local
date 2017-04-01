@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/02/04 13:28:31.000.427,=C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/02/04 13:31:15.000.013,=C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/02/04 13:37:25.000.481,=C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/02/05 00:30:36.000.517,=C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/02/05 00:39:45.000.164,=C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/02/06 19:13:20.000.978,=C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/02/12 11:31:26.000.757,=C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/02/12 11:31:47.000.739,C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Tonho\Documents\RAD Studio\Projects\UPrincipal.dfm</Transaction>
+    <Transaction>2017/02/12 11:31:47.000.739,C:\Users\Tonho\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Tonho\Documents\RAD Studio\Projects\UPrincipal.pas</Transaction>
+    <Transaction>2017/02/12 11:32:03.000.493,C:\Users\Tonho\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Tonho\Documents\RAD Studio\Projects\LerArquivoTexto\LerArqTexto.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
