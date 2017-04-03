@@ -1,0 +1,74 @@
+unit UCadastro01;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    SpinEdit1: TSpinEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Memo1: TMemo;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+    Procedure LimparCampos(estado : Boolean);
+    Procedure Salvar;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  Button1.Enabled := false;
+  Button2.Enabled := true;
+  LimparCampos(True);
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  Button1.Enabled := true;
+  Button2.Enabled := false;
+end;
+
+Procedure TForm1.LimparCampos(estado : Boolean);
+var
+  I : Integer;
+begin
+
+  for I := 0 to ComponentCount - 1 do
+    begin
+      if Components[I] is TEdit then
+      begin
+          (Components[I] as TEdit).Text := '';
+          (Components[I] as TEdit).Enabled := estado;
+      end;
+
+      if Components[I] is TSpinEdit then
+        (Components[I] as TSpinEdit).Value := 0;
+    end;
+end;
+
+procedure TForm1.Salvar;
+begin
+  Memo1.Lines.Text := 'Nome: '+Edit1.Text+', Apelido: '+Edit2.Text+', Idade: '+IntToStr(SpinEdit1.Value);
+  LimparCampos(False);
+end;
+
+end.
